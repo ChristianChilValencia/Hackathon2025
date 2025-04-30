@@ -1,9 +1,69 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Marketplace</ion-title>
+    <ion-title>
+      Customer Shop
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/tabs/tab1">
+        <ion-icon name="people"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
+  <div class="ion-padding">
+    <ion-row>
+      <ion-col size="6" *ngFor="let product of products">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ product.name }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Price: ₱{{ product.price }}</p>
+            <p class="description">{{ product.description }}</p>
+            
+            <!-- Quantity controls -->
+            <div class="quantity-controls">
+              <ion-button fill="clear" size="small" (click)="adjustQuantity(product, -1)" [disabled]="!product.quantity">
+                <ion-icon name="remove-circle" slot="icon-only"></ion-icon>
+              </ion-button>
+              
+              <span class="quantity">{{ product.quantity || 0 }}</span>
+              
+              <ion-button fill="clear" size="small" (click)="adjustQuantity(product, 1)">
+                <ion-icon name="add-circle" slot="icon-only" color="success"></ion-icon>
+              </ion-button>
+            </div>
+            
+            <!-- Action buttons -->
+            <div class="action-buttons">
+              <ion-button expand="block" size="small" (click)="showCustomerActionSheet(product)" color="medium">
+                More Options
+              </ion-button>
+              <ion-button expand="block" size="small" 
+                          [color]="product.quantity ? 'success' : 'medium'"
+                          (click)="product.quantity ? undefined : adjustQuantity(product, 1)" 
+                          [disabled]="product.quantity > 0">
+                {{ product.quantity ? 'Added to cart' : 'Add to cart' }}
+                <ion-icon [name]="product.quantity ? 'checkmark-circle' : 'cart'" slot="end"></ion-icon>
+              </ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <ion-footer *ngIf="cartItems.length > 0">
+    <ion-toolbar>
+      <ion-title size="small">Total: ₱{{ getCartTotal().toFixed(2) }}</ion-title>
+      <ion-buttons slot="end">
+        <ion-button expand="block" color="success" (click)="goToCheckout()">
+          Checkout ({{ getTotalItems() }} items)
+          <ion-icon name="bag-check" slot="end"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
 </ion-content>
