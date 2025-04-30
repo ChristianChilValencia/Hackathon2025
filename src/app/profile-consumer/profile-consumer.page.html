@@ -5,9 +5,29 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">ProfileConsumer</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-item>
+    <ion-input type="text" placeholder="First Name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input type="text" placeholder="Last Name"></ion-input>
+  </ion-item>
+  <br/>
+  <ion-item>
+    <ion-input type="text" placeholder="Password"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input type="text" placeholder="Phone Number"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input type="date" placeholder="DOB">Date of Birth</ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-select label="Gender" placeholder="Gender">
+      <ion-select-option value="Male">Male</ion-select-option>
+      <ion-select-option value="Female">Female</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-checkbox labelPlacement="end">I Agree with <a href="privacy">privacy</a> and <a href="policy">policy</a></ion-checkbox>
+  <br/>
+  <ion-button id="CreateAccount">Create Account</ion-button>
 </ion-content>
