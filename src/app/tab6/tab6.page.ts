@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActionSheetController, AlertController, ToastController } from '@ionic/angular';
+import { ProductsService } from '../services/products.service';
 
 @Component({
   selector: 'app-tab6',
@@ -14,7 +15,8 @@ export class Tab6Page {
   constructor(
     private actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private productsService: ProductsService
   ) {}
 
   ionViewWillEnter() {
@@ -22,29 +24,21 @@ export class Tab6Page {
   }
 
   loadProducts() {
-    const storedProducts = localStorage.getItem('products');
-    this.products = storedProducts ? JSON.parse(storedProducts) : [];
-    
-    // Initialize quantity for each product
-    this.products.forEach(product => {
-      if (!product.quantity) {
-        product.quantity = 0;
-      }
-    });
-    
-    // Load cart if available
-    const storedCart = localStorage.getItem('cart');
-    this.cartItems = storedCart ? JSON.parse(storedCart) : [];
-    
-    // Update quantities from cart
-    if (this.cartItems.length > 0) {
-      this.cartItems.forEach(item => {
-        const productIndex = this.products.findIndex(p => p.id === item.id);
-        if (productIndex !== -1) {
-          this.products[productIndex].quantity = item.quantity;
-        }
-      });
+    this.products = this.productsService.loadProducts();
+    this.cartItems = this.productsService.getCartItems();
+  }
+
+  // Add this method to handle template calls
+  adjustQuantity(product: any, change: number) {
+    const updatedProduct = this.productsService.adjustQuantity(product, change);
+    if (change > 0) {
+      this.presentToast(`${updatedProduct.name} added to cart`);
+    } else if (change < 0 && updatedProduct.quantity > 0) {
+      this.presentToast(`Removed one ${updatedProduct.name} from cart`);
+    } else if (change < 0 && updatedProduct.quantity === 0) {
+      this.presentToast(`${updatedProduct.name} removed from cart`);
     }
+    return updatedProduct;
   }
 
   async showCustomerActionSheet(product: any) {
@@ -56,7 +50,8 @@ export class Tab6Page {
           text: 'Add to Cart',
           icon: 'cart',
           handler: () => {
-            this.adjustQuantity(product, 1);
+            const updatedProduct = this.productsService.adjustQuantity(product, 1);
+            this.presentToast(`${updatedProduct.name} added to cart`);
           }
         },
         {
@@ -112,7 +107,10 @@ export class Tab6Page {
           handler: (data) => {
             const quantity = parseInt(data.quantity, 10);
             if (!isNaN(quantity) && quantity >= 0) {
-              this.updateQuantity(product, quantity);
+              const updatedProduct = this.productsService.updateQuantity(product, quantity);
+              this.presentToast(quantity > 0 ? 
+                `${updatedProduct.name} x ${quantity} added to cart` : 
+                `${updatedProduct.name} removed from cart`);
             }
           }
         }
@@ -122,53 +120,8 @@ export class Tab6Page {
     await alert.present();
   }
 
-  adjustQuantity(product: any, change: number) {
-    const newQuantity = (product.quantity || 0) + change;
-    if (newQuantity >= 0) {
-      this.updateQuantity(product, newQuantity);
-    }
-  }
-
-  updateQuantity(product: any, quantity: number) {
-    // Update product quantity
-    product.quantity = quantity;
-    
-    // Update cart
-    const existingItemIndex = this.cartItems.findIndex(item => item.id === product.id);
-    
-    if (quantity > 0) {
-      const cartItem = {
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        quantity: quantity
-      };
-      
-      if (existingItemIndex !== -1) {
-        this.cartItems[existingItemIndex] = cartItem;
-      } else {
-        this.cartItems.push(cartItem);
-      }
-    } else if (existingItemIndex !== -1) {
-      // Remove item if quantity is 0
-      this.cartItems.splice(existingItemIndex, 1);
-    }
-    
-    // Save cart
-    this.saveCart();
-    
-    // Show toast confirmation
-    this.presentToast(quantity > 0 ? 
-      `${product.name} x ${quantity} added to cart` : 
-      `${product.name} removed from cart`);
-  }
-
   removeFromCart(product: any) {
-    const existingItemIndex = this.cartItems.findIndex(item => item.id === product.id);
-    if (existingItemIndex !== -1) {
-      this.cartItems.splice(existingItemIndex, 1);
-      product.quantity = 0;
-      this.saveCart();
+    if (this.productsService.removeFromCart(product)) {
       this.presentToast(`${product.name} removed from cart`);
     }
   }
@@ -184,16 +137,12 @@ export class Tab6Page {
     await alert.present();
   }
 
-  saveCart() {
-    localStorage.setItem('cart', JSON.stringify(this.cartItems));
-  }
-
   getTotalItems() {
-    return this.cartItems.reduce((total, item) => total + item.quantity, 0);
+    return this.productsService.getTotalItems();
   }
 
   getCartTotal() {
-    return this.cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    return this.productsService.getCartTotal();
   }
 
   async goToCheckout() {
@@ -203,7 +152,7 @@ export class Tab6Page {
     }
 
     // Calculate total
-    const total = this.cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const total = this.getCartTotal();
     
     const alert = await this.alertCtrl.create({
       header: 'Checkout',
@@ -215,13 +164,13 @@ export class Tab6Page {
         },
         {
           text: 'Checkout',
-          handler: () => {
-            // Here you would normally redirect to a payment page
-            // For now, just clear the cart and show success
-            this.cartItems = [];
-            this.saveCart();
-            this.loadProducts(); // Reset product quantities
-            this.presentToast('Order placed successfully!');
+          handler: async () => {
+            // Process checkout via service
+            const success = await this.productsService.processCheckout();
+            if (success) {
+              this.loadProducts(); // Refresh products and cart
+              this.presentToast('Order placed successfully!');
+            }
           }
         }
       ]

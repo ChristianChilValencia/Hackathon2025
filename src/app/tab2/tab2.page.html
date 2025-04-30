@@ -12,8 +12,8 @@
 <ion-content [fullscreen]="true">
   <div class="ion-padding">
     <ion-row>
-      <ion-col size="6" *ngFor="let product of products">
-        <ion-card (click)="showActionSheet(product)">
+      <ion-col size="6" size-md="6" *ngFor="let product of products">
+        <ion-card (click)="showActionSheet(product)" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
           <ion-card-header>
             <ion-card-title>{{ product.name }}</ion-card-title>
           </ion-card-header>
