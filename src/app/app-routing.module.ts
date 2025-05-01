@@ -33,6 +33,18 @@ const routes: Routes = [
   {
     path: 'tabs-b',
     loadChildren: () => import('./tabs-b/tabs-b.module').then( m => m.TabsBPageModule)
+  },
+  {
+    path: 'login-page-org',
+    loadChildren: () => import('./login-page-org/login-page-org.module').then( m => m.LoginPageOrgPageModule)
+  },
+  {
+    path: 'tab5',
+    loadChildren: () => import('./tab5/tab5.module').then( m => m.Tab5PageModule)
+  },
+  {
+    path: 'tab1',
+    loadChildren: () => import('./tab1/tab1.module').then( m => m.Tab1PageModule)
   }
 ];
 
