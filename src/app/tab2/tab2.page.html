@@ -24,7 +24,7 @@
         <ion-card (click)="showActionSheet(product)" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
           <!-- Product Image Section -->
           <div class="product-image-container" *ngIf="product.imageType">
-            <img [src]="'assets/' + product.imageType + ''" alt="Product Image" class="product-image">
+            <img [src]="'assets/' + product.imageType + '.png'" alt="Product Image" class="product-image">
           </div>
           <ion-card-header>
             <ion-card-title>{{ product.name }}</ion-card-title>

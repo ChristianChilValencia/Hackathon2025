@@ -11,32 +11,12 @@ const routes: Routes = [
     loadChildren: () => import('./welcome-page1/welcome-page1.module').then( m => m.WelcomePage1PageModule)
   },
   {
-    path: 'welcome-page2',
-    loadChildren: () => import('./welcome-page2/welcome-page2.module').then( m => m.WelcomePage2PageModule)
-  },
-  {
-    path: 'login-page',
-    loadChildren: () => import('./login-page/login-page.module').then( m => m.LoginPagePageModule)
-  },
-  {
-    path: 'profile-consumer',
-    loadChildren: () => import('./profile-consumer/profile-consumer.module').then( m => m.ProfileConsumerPageModule)
-  },
-  {
-    path: 'profile-organization',
-    loadChildren: () => import('./profile-organization/profile-organization.module').then( m => m.ProfileOrganizationPageModule)
-  },
-  {
     path: 'tab4',
     loadChildren: () => import('./tab4/tab4.module').then( m => m.Tab4PageModule)
   },
   {
     path: 'tabs-b',
     loadChildren: () => import('./tabs-b/tabs-b.module').then( m => m.TabsBPageModule)
-  },
-  {
-    path: 'login-page-org',
-    loadChildren: () => import('./login-page-org/login-page-org.module').then( m => m.LoginPageOrgPageModule)
   },
   {
     path: 'tab5',
