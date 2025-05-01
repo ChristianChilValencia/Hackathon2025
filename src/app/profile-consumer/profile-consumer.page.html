@@ -1,41 +1,85 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>ProfileConsumer</ion-title>
+    <ion-title>AgriVenture</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="help-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 20px;">
-    <ion-img>
-      <img src="assets/icons/profileimg1.png" alt="Profile Image" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
-    </ion-img>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="profile-avatar">
+    <img src="assets/icons/profileimg1.png" alt="Profile Image">
   </div>
-  <div style="display: flex; gap: 10px;">
-    <ion-item style="flex: 1;">
-      <ion-input type="text" placeholder="Pedro" labelPlacement="stacked">First Name</ion-input>
-    </ion-item>
-    <ion-item style="flex: 1;">
-      <ion-input type="text" placeholder="Penduko" labelPlacement="stacked">Last Name</ion-input>
+  
+  <div class="name-row">
+    <div class="input-group">
+      <div class="label">First Name</div>
+      <ion-item>
+        <ion-input type="text" placeholder="First Name"></ion-input>
+      </ion-item>
+    </div>
+    
+    <div class="input-group">
+      <div class="label">Last Name</div>
+      <ion-item>
+        <ion-input type="text" placeholder="Last Name"></ion-input>
+      </ion-item>
+    </div>
+  </div>
+  
+  <div class="input-group">
+    <div class="label">Email</div>
+    <ion-item>
+      <ion-input type="email" placeholder="Enter your Email"></ion-input>
     </ion-item>
   </div>
-  <br/>
-  <ion-item>
-    <ion-input type="text" placeholder="******" labelPlacement="stacked">Password</ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-input type="text" placeholder="+639207894566" labelPlacement="stacked">Phone Number</ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-input  value="01-01-2000" placeholder="DOB" labelPlacement="stacked">Date of Birth</ion-input>
-    <ion-icon name="calendar" slot="end"></ion-icon>
-  </ion-item>
-  <ion-item>
-    <ion-select label="Gender" placeholder="Male">
-      <ion-select-option value="Male">Male</ion-select-option>
-      <ion-select-option value="Female">Female</ion-select-option>
-    </ion-select>
-  </ion-item>
-  <ion-checkbox labelPlacement="end">I Agree with <a href="privacy">privacy</a> and <a href="policy">policy</a></ion-checkbox>
-  <br/>
-  <ion-button id="CreateAccount">Create Account</ion-button>
+  
+  <div class="input-group">
+    <div class="label">Password</div>
+    <ion-item>
+      <ion-input type="password" placeholder="Enter your Password"></ion-input>
+      <ion-icon name="eye-outline" slot="end"></ion-icon>
+    </ion-item>
+  </div>
+  
+  <div class="input-group">
+    <div class="label">Phone Number</div>
+    <ion-item>
+      <ion-input type="tel" placeholder="Enter your Phone Number"></ion-input>
+    </ion-item>
+  </div>
+  
+  <div class="name-row">
+    <div class="input-group">
+      <div class="label">Date Of Birth</div>
+      <ion-item>
+        <ion-input placeholder="Enter your Birth Date"></ion-input>
+        <ion-icon name="calendar-outline" slot="end"></ion-icon>
+      </ion-item>
+    </div>
+    
+    <div class="input-group">
+      <div class="label">Gender</div>
+      <ion-item>
+        <ion-input placeholder="Enter Your Gender"></ion-input>
+        <ion-icon name="chevron-down-outline" slot="end"></ion-icon>
+      </ion-item>
+    </div>
+  </div>
+  
+  <div class="checkbox-container">
+    <ion-checkbox>
+      <span>I Agree with <a href="privacy">privacy</a> and <a href="policy">policy</a></span>
+    </ion-checkbox>
+  </div>
+  
+  <ion-button expand="block" class="create-button">Create Account</ion-button>
 </ion-content>
