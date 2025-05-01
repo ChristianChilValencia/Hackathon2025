@@ -1,0 +1,62 @@
+// Status color indicators
+.status-received {
+  color: #3880ff; // Ionic blue
+  font-weight: 500;
+}
+
+.status-dispatched {
+  color: #f7b500; // Ionic warning (amber)
+  font-weight: 500;
+}
+
+.status-delivered {
+  color: #2dd36f; // Ionic success (green)
+  font-weight: 500;
+}
+
+.status-cancelled {
+  color: #eb445a; // Ionic danger (red)
+  font-weight: 500;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  
+  ion-icon {
+    font-size: 5rem;
+    color: var(--ion-color-medium);
+    margin-bottom: 1rem;
+  }
+  
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  
+  p {
+    color: var(--ion-color-medium);
+    margin-bottom: 1.5rem;
+  }
+  
+  ion-button {
+    margin-top: 1rem;
+    max-width: 200px;
+  }
+}
+
+ion-list-header {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--ion-color-primary);
+}
+
+ion-item ion-note {
+  font-size: 1rem;
+  font-weight: 500;
+}

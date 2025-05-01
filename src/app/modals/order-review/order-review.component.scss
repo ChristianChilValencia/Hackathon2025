@@ -1,0 +1,18 @@
+ion-list-header {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--ion-color-primary);
+  padding-top: 16px;
+}
+
+ion-note {
+  font-size: 1rem;
+}
+
+ion-item {
+  --padding-start: 0;
+}
+
+ion-footer ion-toolbar {
+  padding: 8px 16px;
+}
