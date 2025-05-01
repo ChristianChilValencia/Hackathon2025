@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Products</ion-title>
+    <ion-title>Stocks</ion-title>
     <ion-buttons slot="end">
       <ion-button routerLink="/tabs-b/tab5">
         <ion-icon name="person"></ion-icon>
@@ -12,13 +12,44 @@
 <ion-content [fullscreen]="true">
   <div class="ion-padding">
     <ion-row>
-      <ion-col size="6" size-md="6" *ngFor="let product of products">
+      <ion-col size="12" size-md="6" *ngFor="let product of products">
         <ion-card (click)="showActionSheet(product)" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
           <ion-card-header>
             <ion-card-title>{{ product.name }}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <p>Price: ₱{{ product.price }}</p>
+            <p><strong>Price:</strong> ₱{{ product.price }}</p>
+            
+            <!-- Quantity Information Section -->
+            <div class="quantity-info">
+              <p *ngIf="product.kilos">
+                <ion-icon name="scale-outline" color="primary"></ion-icon>
+                <strong>Weight:</strong> {{ product.kilos }} kg
+              </p>
+              
+              <p *ngIf="product.quantityAmount">
+                <ion-icon name="calculator-outline" color="tertiary"></ion-icon>
+                <strong>Quantity:</strong> {{ product.quantityAmount }} {{ getUnitDisplay(product.quantityUnit) }}
+              </p>
+            </div>
+            
+            <div class="date-info" *ngIf="product.harvestDate">
+              <p>
+                <ion-icon name="calendar-outline" color="success"></ion-icon>
+                <strong>Harvested:</strong> {{ formatDate(product.harvestDate) }}
+              </p>
+            </div>
+            
+            <div class="date-info" *ngIf="product.wasteDate">
+              <p [ngClass]="{'warning-date': isNearWasteDate(product.wasteDate)}">
+                <ion-icon name="alert-circle-outline" [color]="isNearWasteDate(product.wasteDate) ? 'danger' : 'warning'"></ion-icon>
+                <strong>Use before:</strong> {{ formatDate(product.wasteDate) }}
+                <span *ngIf="isNearWasteDate(product.wasteDate)" class="expiry-warning">
+                  ({{ getDaysUntilWaste(product.wasteDate) }} days left)
+                </span>
+              </p>
+            </div>
+            
             <p>{{ product.description }}</p>
           </ion-card-content>
         </ion-card>

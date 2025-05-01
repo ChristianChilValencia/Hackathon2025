@@ -19,9 +19,42 @@
   <ion-item>
     <ion-label position="stacked">Price</ion-label>
     <ion-input type="number" [(ngModel)]="product.price" placeholder="Enter price"></ion-input>
-    <ion-note color="danger" *ngIf="product?.price !== undefined && product.price <= 0">
-      Price must be greater than 0
-    </ion-note>
+  </ion-item>
+  
+  <!-- Quantity tracking section -->
+  <ion-item-divider>
+    <ion-label>Quantity Information</ion-label>
+  </ion-item-divider>
+  
+  <ion-item>
+    <ion-label position="stacked">Weight (kg)</ion-label>
+    <ion-input type="number" [(ngModel)]="product.kilos" placeholder="Enter weight in kg"></ion-input>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label position="stacked">
+      <span style="display: flex; align-items: center;">
+        Quantity 
+        <ion-select [(ngModel)]="product.quantityUnit" interface="popover" style="margin-left: 8px; min-width: 100px;">
+          <ion-select-option value="pieces">Pieces</ion-select-option>
+          <ion-select-option value="bundles">Bundles</ion-select-option>
+          <ion-select-option value="sacks">Sacks</ion-select-option>
+          <ion-select-option value="boxes">Boxes</ion-select-option>
+          <ion-select-option value="crates">Crates</ion-select-option>
+        </ion-select>
+      </span>
+    </ion-label>
+    <ion-input type="number" [(ngModel)]="product.quantityAmount" placeholder="Enter quantity"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Harvest Date</ion-label>
+    <ion-datetime display-format="MMM DD, YYYY" [(ngModel)]="product.harvestDate" placeholder="Select date"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Potential Waste Date</ion-label>
+    <ion-datetime display-format="MMM DD, YYYY" [(ngModel)]="product.wasteDate" placeholder="Select date"></ion-datetime>
   </ion-item>
 
   <ion-item>
@@ -29,7 +62,7 @@
     <ion-textarea [(ngModel)]="product.description" placeholder="Enter description"></ion-textarea>
   </ion-item>
 
-  <ion-button expand="block" (click)="confirm()" class="ion-margin-top" [disabled]="!product?.name?.trim() || !product?.price || product.price <= 0">
+  <ion-button expand="block" (click)="confirm()" class="ion-margin-top" [disabled]="!product?.name?.trim()">
     {{product?.id ? 'Update' : 'Add'}} Product
   </ion-button>
 </ion-content>

@@ -29,6 +29,11 @@ export class AddProductComponent {
       id: '',
       name: '',
       price: 0,
+      kilos: 0,
+      quantityAmount: 0,
+      quantityUnit: 'pieces',
+      harvestDate: new Date().toISOString(),
+      wasteDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(), // Default to 14 days from now
       description: ''
     };
   }
@@ -41,9 +46,32 @@ export class AddProductComponent {
     if (!this.product?.name?.trim()) {
       return;
     }
-    if (!this.product?.price || this.product.price <= 0) {
-      return;
+    
+    // Make sure we have all required fields with defaults
+    if (!this.product.price) {
+      this.product.price = 0;
     }
+    
+    if (!this.product.kilos) {
+      this.product.kilos = 0;
+    }
+    
+    if (!this.product.quantityAmount) {
+      this.product.quantityAmount = 0;
+    }
+    
+    if (!this.product.quantityUnit) {
+      this.product.quantityUnit = 'pieces';
+    }
+    
+    if (!this.product.harvestDate) {
+      this.product.harvestDate = new Date().toISOString();
+    }
+    
+    if (!this.product.wasteDate) {
+      this.product.wasteDate = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString();
+    }
+    
     return this.modalCtrl.dismiss(this.product, 'confirm');
   }
 }
