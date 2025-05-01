@@ -1,13 +1,36 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>WelcomePage1</ion-title>
+    <ion-title>AgriVenture</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="help-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">WelcomePage1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="logo-container ion-text-center">
+    <img src="assets/images/farm-background.jpg" alt="Farm Background" class="background-image">
+    <h1 class="logo-text">
+      <span class="agri">Agri</span><span class="venture">Venture</span>
+    </h1>
+    <p class="tagline">Where Farmers Meet the Future of Buying</p>
+  </div>
+
+  <div class="button-container">
+    <ion-button expand="block" class="login-button" routerLink="/login-page">
+      <ion-icon name="person-outline" slot="start"></ion-icon>
+      Log in as a Customer
+    </ion-button>
+
+    <ion-button expand="block" class="login-button" routerLink="/organization-login">
+      <ion-icon name="storefront-outline" slot="start"></ion-icon>
+      Log in as an Organization
+    </ion-button>
+
+    <div class="signup-text ion-text-center">
+      <p>Don't have an account? <a routerLink="/sign-up">Sign Up</a></p>
+    </div>
+  </div>
 </ion-content>
