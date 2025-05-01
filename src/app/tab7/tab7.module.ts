@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
@@ -15,6 +15,7 @@ import { Tab7Page } from './tab7.page';
     IonicModule,
     Tab7PageRoutingModule
   ],
-  declarations: [Tab7Page]
+  declarations: [Tab7Page],
+  providers: [DatePipe]
 })
 export class Tab7PageModule {}

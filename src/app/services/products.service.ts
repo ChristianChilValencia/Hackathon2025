@@ -7,6 +7,7 @@ import { ToastController, AlertController } from '@ionic/angular';
 export class ProductsService {
   private products: any[] = [];
   private cartItems: any[] = [];
+  private completedOrders: any[] = [];
 
   constructor(
     private toastCtrl: ToastController,
@@ -41,8 +42,18 @@ export class ProductsService {
     return this.products;
   }
 
+  loadOrders() {
+    const storedOrders = localStorage.getItem('orders');
+    this.completedOrders = storedOrders ? JSON.parse(storedOrders) : [];
+    return this.completedOrders;
+  }
+
   getProducts() {
     return this.products;
+  }
+
+  getOrders() {
+    return this.completedOrders;
   }
 
   getCartItems() {
@@ -111,12 +122,46 @@ export class ProductsService {
     localStorage.setItem('cart', JSON.stringify(this.cartItems));
   }
 
+  saveOrders() {
+    localStorage.setItem('orders', JSON.stringify(this.completedOrders));
+  }
+
   getTotalItems() {
     return this.cartItems.reduce((total, item) => total + item.quantity, 0);
   }
 
   getCartTotal() {
     return this.cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  }
+
+  processOrder(orderDetails: any) {
+    if (this.cartItems.length === 0) {
+      return false;
+    }
+
+    // Create a new order with all details
+    const newOrder = {
+      id: Date.now().toString(),
+      orderDate: new Date(),
+      items: [...this.cartItems],
+      total: this.getCartTotal(),
+      ...orderDetails
+    };
+
+    // Add to completed orders
+    this.completedOrders.push(newOrder);
+    this.saveOrders();
+    
+    // Clear cart
+    this.cartItems = [];
+    this.saveCart();
+    
+    // Reset product quantities
+    this.products.forEach(product => {
+      product.quantity = 0;
+    });
+    
+    return true;
   }
 
   async processCheckout() {

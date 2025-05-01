@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Cart</ion-title>
+    <ion-title>My Orders</ion-title>
     <ion-buttons slot="end">
       <ion-button routerLink="/tabs/tab1">
         <ion-icon name="people"></ion-icon>
@@ -10,5 +10,31 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
+  <div class="ion-padding">
+    <ion-list lines="full" *ngIf="orders.length > 0">
+      <ion-list-header>
+        <ion-label>Order History</ion-label>
+      </ion-list-header>
+      
+      <ion-item *ngFor="let order of orders" button detail (click)="showOrderDetails(order)">
+        <ion-label>
+          <h2>Order #{{ order.id.substring(order.id.length - 6) }}</h2>
+          <p>Date: {{ order.orderDate | date:'medium' }}</p>
+          <p>Items: {{ order.items.length }} | Status: <ion-text color="success">{{ order.status }}</ion-text></p>
+        </ion-label>
+        <ion-note slot="end" color="primary">₱{{ order.total.toFixed(2) }}</ion-note>
+      </ion-item>
+    </ion-list>
+
+    <div class="empty-state" *ngIf="orders.length === 0">
+      <ion-icon name="receipt-outline" size="large"></ion-icon>
+      <h2>No Orders Yet</h2>
+      <p>Your order history will appear here</p>
+      <ion-button expand="block" routerLink="/tabs/tab6">
+        Shop Now
+        <ion-icon name="cart" slot="end"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
 </ion-content>
+

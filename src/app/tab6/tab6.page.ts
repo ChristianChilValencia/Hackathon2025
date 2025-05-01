@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, AlertController, ToastController } from '@ionic/angular';
+import { ActionSheetController, AlertController, ModalController, ToastController } from '@ionic/angular';
 import { ProductsService } from '../services/products.service';
+import { OrderReviewComponent } from '../modals/order-review/order-review.component';
 
 @Component({
   selector: 'app-tab6',
@@ -16,6 +17,7 @@ export class Tab6Page {
     private actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
+    private modalCtrl: ModalController,
     private productsService: ProductsService
   ) {}
 
@@ -151,32 +153,22 @@ export class Tab6Page {
       return;
     }
 
-    // Calculate total
-    const total = this.getCartTotal();
-    
-    const alert = await this.alertCtrl.create({
-      header: 'Checkout',
-      message: `Total: ₱${total.toFixed(2)}<br><br>Proceed to payment?`,
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        },
-        {
-          text: 'Checkout',
-          handler: async () => {
-            // Process checkout via service
-            const success = await this.productsService.processCheckout();
-            if (success) {
-              this.loadProducts(); // Refresh products and cart
-              this.presentToast('Order placed successfully!');
-            }
-          }
-        }
-      ]
+    const modal = await this.modalCtrl.create({
+      component: OrderReviewComponent,
+      cssClass: 'order-review-modal',
+      breakpoints: [0, 0.5, 0.8, 1.0],
+      initialBreakpoint: 1.0,
+      backdropDismiss: false,
+      showBackdrop: true
     });
 
-    await alert.present();
+    modal.onDidDismiss().then((result) => {
+      if (result.data?.ordered) {
+        this.loadProducts(); // Refresh products and cart after order is placed
+      }
+    });
+
+    await modal.present();
   }
 
   async presentToast(message: string) {

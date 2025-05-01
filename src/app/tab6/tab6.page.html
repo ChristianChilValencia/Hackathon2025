@@ -55,15 +55,17 @@
     </ion-row>
   </div>
 
-  <ion-footer *ngIf="cartItems.length > 0">
-    <ion-toolbar>
-      <ion-title size="small">Total: ₱{{ getCartTotal().toFixed(2) }}</ion-title>
-      <ion-buttons slot="end">
-        <ion-button expand="block" color="success" (click)="goToCheckout()">
-          Checkout ({{ getTotalItems() }} items)
-          <ion-icon name="bag-check" slot="end"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-footer>
+
 </ion-content>
+
+<ion-footer *ngIf="cartItems.length > 0">
+  <ion-toolbar>
+    <ion-title size="small">Total: ₱{{ getCartTotal().toFixed(2) }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button expand="block" color="success" (click)="goToCheckout()">
+        Checkout ({{ getTotalItems() }} items)
+        <ion-icon name="bag-check" slot="end"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
