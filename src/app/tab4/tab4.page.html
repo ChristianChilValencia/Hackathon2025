@@ -1,13 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Profile</ion-title>
-    
     <ion-buttons slot="end">
       <ion-button routerLink="/welcome-page1">
-        <ion-icon name="swap-horizontal"></ion-icon>
+        <ion-icon name="settings-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-
     <ion-buttons slot="end">
       <ion-button routerLink="/tabs-b/tab5">
         <ion-icon name="person"></ion-icon>
@@ -16,24 +14,40 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-item>
-    <label>First Name: Pedro</label>
-  </ion-item>
-  <ion-item>
-    <label>Last Name: Penduko</label>
-  </ion-item>
-  <br/>
-  <ion-item>
-    <label>Password: ******</label>
-  </ion-item>
-  <ion-item>
-    <label>Phone Number: +639207894566</label>
-  </ion-item>
-  <ion-item>
-    <label>Date of Birth: 2000-01-01</label>
-  </ion-item>
-  <ion-item>
-    <label>Gender: Male</label>
-  </ion-item>
+<ion-content [fullscreen]="true" class="profile-content">
+  <div class="profile-header">
+    <div class="profile-image-container">
+      <img src="assets/org.png" alt="Profile Photo" class="profile-image">
+    </div>
+    <h2 class="profile-name">Cebu Farmers Market</h2>
+    <p class="profile-email">cebufarmersmarket&#64;gmail.com</p>
+  </div>
+
+  <div class="profile-details">
+    <ion-item>
+      <ion-label position="stacked">Home Address</ion-label>
+      <ion-input value="Banilad Town Center, Cebu City" readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Cellphone Number</ion-label>
+      <div class="phone-input">
+        <div class="flag-container">
+            <ion-icon name="call" class="flag-icon"></ion-icon>
+        </div>
+        <ion-input value="+6399104563211" readonly></ion-input>
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Organizational Name</ion-label>
+      <ion-input value="Cebu Farmers Market" readonly></ion-input>
+      <ion-icon name="calendar-outline" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input value="cebufarmersmarket@gmail.com" readonly></ion-input>
+    </ion-item>
+  </div>
 </ion-content>

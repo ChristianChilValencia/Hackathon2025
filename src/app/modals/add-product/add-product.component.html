@@ -8,6 +8,25 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  <!-- Image Preview Section -->
+  <div class="image-preview-container" *ngIf="product.imageType">
+    <img [src]="'assets/product-images/' + product.imageType + '.jpg'" alt="Product Image" class="product-image-preview">
+  </div>
+
+  <!-- Image Selection Section -->
+  <ion-item-divider>
+    <ion-label>Product Image</ion-label>
+  </ion-item-divider>
+  <ion-item>
+    <ion-label position="stacked">Select Image Type</ion-label>
+    <ion-select [(ngModel)]="product.imageType" interface="action-sheet" placeholder="Choose product image">
+      <ion-select-option value="vegetables">Vegetables</ion-select-option>
+      <ion-select-option value="fruits">Fruits</ion-select-option>
+      <ion-select-option value="grains">Grains</ion-select-option>
+      <ion-select-option value="dairy">Dairy</ion-select-option>
+    </ion-select>
+  </ion-item>
+
   <ion-item>
     <ion-label position="stacked">Name</ion-label>
     <ion-input [(ngModel)]="product.name" placeholder="Enter product name"></ion-input>

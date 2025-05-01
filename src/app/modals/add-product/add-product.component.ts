@@ -28,6 +28,7 @@ export class AddProductComponent {
     this.product = {
       id: '',
       name: '',
+      imageType: '',
       price: 0,
       kilos: 0,
       quantityAmount: 0,
