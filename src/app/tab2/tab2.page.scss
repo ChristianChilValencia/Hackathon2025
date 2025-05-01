@@ -1,0 +1,41 @@
+.date-info {
+  margin-top: 8px;
+  margin-bottom: 8px;
+
+  p {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 4px 0;
+    
+    ion-icon {
+      font-size: 18px;
+      margin-right: 4px;
+    }
+  }
+}
+
+.warning-date {
+  color: var(--ion-color-danger);
+  font-weight: 500;
+}
+
+.expiry-warning {
+  background-color: rgba(var(--ion-color-danger-rgb), 0.15);
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin-left: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+ion-card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+}

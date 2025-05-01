@@ -14,69 +14,24 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <!-- Add avatar as a regular element that scrolls with content -->
-  <div class="profile-avatar-container">
-    <div class="profile-avatar"></div>
-  </div>
-  
-  <div class="name-row">
-    <div class="input-group">
-      <div class="label">First Name</div>
-      <ion-item>
-        <ion-input type="text" placeholder="First Name"></ion-input>
-      </ion-item>
-    </div>
-    
-    <div class="input-group">
-      <div class="label">Last Name</div>
-      <ion-item>
-        <ion-input type="text" placeholder="Last Name"></ion-input>
-      </ion-item>
-    </div>
-  </div>
-  
-  <div class="input-group">
-    <div class="label">Email</div>
-    <ion-item>
-      <ion-input type="email" placeholder="Enter your Email"></ion-input>
-    </ion-item>
-  </div>
-  
-  <div class="input-group">
-    <div class="label">Password</div>
-    <ion-item>
-      <ion-input type="password" placeholder="Enter your Password"></ion-input>
-      <ion-icon name="eye-outline" slot="end"></ion-icon>
-    </ion-item>
-  </div>
-  
-  <div class="input-group">
-    <div class="label">Phone Number</div>
-    <ion-item>
-      <ion-input type="tel" placeholder="Enter your Phone Number"></ion-input>
-    </ion-item>
-  </div>
-  
-  <div class="input-group">
-    <div class="label">Organization Name</div>
-    <ion-item>
-      <ion-input type="text" placeholder="Enter your Organization Name"></ion-input>
-    </ion-item>
-  </div>
-  
-  <div class="input-group">
-    <div class="label">Organization Address</div>
-    <ion-item>
-      <ion-input type="text" placeholder="Enter your Organization Address"></ion-input>
-    </ion-item>
-  </div>
-  
-  <div class="checkbox-container">
-    <ion-checkbox>
-      <span>I Agree with <a href="privacy">privacy</a> and <a href="policy">policy</a></span>
-    </ion-checkbox>
-  </div>
-  
-  <ion-button expand="block" class="create-button">Create Account</ion-button>
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-input type="text" labelPlacement="stacked" placeholder="Cebu Farmers Market" >Organization Name</ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input type="text" placeholder="Banilad Town Center, Cebu City">Organization Address</ion-input>
+  </ion-item>
+  <br/>
+  <ion-item>
+    <ion-input type="text" labelPlacement="stacked" placeholder="cebufarmersmarket@example.com">Email</ion-input>
+  </ion-item>
+  <ion-item>
+  <ion-input type="text" labelPlacement="stacked" placeholder="********">Password</ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input type="text" labelPlacement="stacked" placeholder="+6399104563211">Phone Number</ion-input>
+  </ion-item>
+  <ion-checkbox labelPlacement="end">I Agree with <a href="privacy">privacy</a> and <a href="policy">policy</a></ion-checkbox>
+  <br/>
+  <ion-button id="CreateAccount">Create Account</ion-button>
 </ion-content>

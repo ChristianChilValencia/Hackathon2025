@@ -18,6 +18,52 @@ export class Tab2Page {
     this.loadProducts();
   }
 
+  // Get formatted display for quantity units
+  getUnitDisplay(unit: string): string {
+    if (!unit) return 'pieces';
+    
+    // Singular to plural mapping if needed
+    switch (unit) {
+      case 'piece': return 'pieces';
+      case 'bundle': return 'bundles';
+      case 'sack': return 'sacks';
+      case 'box': return 'boxes';
+      case 'crate': return 'crates';
+      default: return unit;
+    }
+  }
+
+  // Format date from ISO string to readable format
+  formatDate(dateString: string): string {
+    if (!dateString) return 'N/A';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+      month: 'short', 
+      day: 'numeric', 
+      year: 'numeric' 
+    });
+  }
+
+  // Check if a product is near its waste date (within 3 days)
+  isNearWasteDate(dateString: string): boolean {
+    if (!dateString) return false;
+    
+    const wasteDate = new Date(dateString);
+    const today = new Date();
+    const daysLeft = Math.floor((wasteDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+    
+    return daysLeft <= 3 && daysLeft >= 0;
+  }
+
+  // Get days until waste date
+  getDaysUntilWaste(dateString: string): number {
+    if (!dateString) return 0;
+    
+    const wasteDate = new Date(dateString);
+    const today = new Date();
+    return Math.max(0, Math.floor((wasteDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)));
+  }
+
   async showActionSheet(product: any) {
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Product Options',

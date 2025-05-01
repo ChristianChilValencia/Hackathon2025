@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab3Page } from './tab3.page';
+import { ActionSheetController, AlertController, ModalController } from '@ionic/angular';
+import { ProductsService } from '../services/products.service';
 
 import { Tab3PageRoutingModule } from './tab3-routing.module';
 
@@ -13,6 +15,12 @@ import { Tab3PageRoutingModule } from './tab3-routing.module';
     FormsModule,
     Tab3PageRoutingModule
   ],
-  declarations: [Tab3Page]
+  declarations: [Tab3Page],
+  providers: [
+    ProductsService,
+    AlertController,
+    ActionSheetController,
+    ModalController
+  ]
 })
 export class Tab3PageModule {}

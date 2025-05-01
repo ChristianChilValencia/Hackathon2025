@@ -9,14 +9,8 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
+  
 </ion-header>
-
-<ion-header>
-  <ion-toolbar color="success">
-    <ion-title>Dashboard</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content class="ion-padding">
   <!-- Stats Cards -->
   <ion-grid>
@@ -61,26 +55,26 @@
   <ion-card>
     <ion-card-header>
       <ion-card-title>Revenue</ion-card-title>
-      <ion-segment value="monthly">
+      <ion-segment value="yearly">
+        <ion-segment-button value="yearly">Yearly</ion-segment-button>
         <ion-segment-button value="monthly">Monthly</ion-segment-button>
         <ion-segment-button value="weekly">Weekly</ion-segment-button>
-        <ion-segment-button value="today">Today</ion-segment-button>
       </ion-segment>
     </ion-card-header>
     <ion-card-content>
-      <img src="" alt="Chart Placeholder" style="width: 100%; height: auto;">
+      <img src="assets/stats2.png" alt="Chart Placeholder" style="width: 100%; height: auto;">
     </ion-card-content>
   </ion-card>
 
   <!-- Pending Deliveries -->
   <ion-item lines="none">
     <ion-label><h2>Pending Deliveries</h2></ion-label>
-    <ion-button fill="clear" slot="end">See All</ion-button>
+    <ion-button fill="clear" slot="end" routerLink="/tabs/tab3">See All</ion-button>
   </ion-item>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col size="6">
+  <ion-grid style="overflow-x: auto; white-space: nowrap;">
+    <ion-row style="display: flex; flex-wrap: nowrap;">
+      <ion-col size="6" style="flex: 0 0 auto;">
         <ion-card>
           <img src="assets/jasmine-rice.jpg" />
           <ion-card-header>
@@ -92,7 +86,7 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
-      <ion-col size="6">
+      <ion-col size="6" style="flex: 0 0 auto;">
         <ion-card>
           <img src="assets/white-corn.jpg" />
           <ion-card-header>
@@ -104,18 +98,30 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
+      <ion-col size="6" style="flex: 0 0 auto;">
+        <ion-card>
+          <img src="assets/jasmine-rice.jpg" />
+          <ion-card-header>
+            <ion-card-title>Joshua Semora</ion-card-title>
+            <ion-card-subtitle>Brown Rice 10 kg</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            ₱735.10
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
     </ion-row>
   </ion-grid>
 
   <!-- Stocks Section -->
   <ion-item lines="none">
     <ion-label><h2>Stocks</h2></ion-label>
-    <ion-button fill="clear" slot="end">See All</ion-button>
+    <ion-button fill="clear" slot="end" routerLink="/tabs/tab2">See All</ion-button>
   </ion-item>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col size="4">
+  <ion-grid style="overflow-x: auto; white-space: nowrap;">
+    <ion-row style="display: flex; flex-wrap: nowrap;">
+      <ion-col size="4" style="flex: 0 0 auto;">
         <ion-card>
           <img src="assets/sweet-potato-1.jpg" />
           <ion-card-header>
@@ -126,21 +132,47 @@
           </ion-card-header>
         </ion-card>
       </ion-col>
-      <ion-col size="4">
+      <ion-col size="4" style="flex: 0 0 auto;">
         <ion-card>
-          <img src="assets/sweet-potato-2.jpg" />
+          <img src="assets/sweet-potato-2.jpg">
           <ion-card-header>
             <ion-card-title>Sweet Potato</ion-card-title>
-            <ion-card-subtitle>20 kg</ion-card-subtitle>
+            <ion-card-subtitle>20 kg
+              <ion-badge color="primary" style="float: right;">89/120</ion-badge>
+            </ion-card-subtitle>
           </ion-card-header>
         </ion-card>
       </ion-col>
-      <ion-col size="4">
+      <ion-col size="4" style="flex: 0 0 auto;">
+        <ion-card>
+          <img src="assets/green-banana.jpg">
+          <ion-card-header>
+            <ion-card-title>Green Banana</ion-card-title>
+            <ion-card-subtitle>56 kg
+              <ion-badge color="primary" style="float: right;">16/70</ion-badge>
+            </ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4" style="flex: 0 0 auto;">
         <ion-card>
           <img src="assets/green-banana.jpg" />
           <ion-card-header>
             <ion-card-title>Green Banana</ion-card-title>
-            <ion-card-subtitle>56 kg</ion-card-subtitle>
+            <ion-card-subtitle>56 kg
+              <ion-badge color="primary" style="float: right;">16/70</ion-badge>
+            </ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4" style="flex: 0 0 auto;">
+        <ion-card>
+          <img src="assets/green-banana.jpg" />
+          <ion-card-header>
+            <ion-card-title>Green Banana</ion-card-title>
+            <ion-card-subtitle>56 kg
+              <ion-badge color="primary" style="float: right;">16/70</ion-badge>
+            </ion-card-subtitle>
           </ion-card-header>
         </ion-card>
       </ion-col>
