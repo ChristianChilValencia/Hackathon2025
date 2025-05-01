@@ -139,12 +139,20 @@ export class ProductsService {
       return false;
     }
 
+    // Calculate total weight (treating quantity as kg)
+    const totalWeight = this.cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
     // Create a new order with all details
     const newOrder = {
       id: Date.now().toString(),
       orderDate: new Date(),
+      receivedDate: new Date(),
+      dispatchedDate: null,
+      deliveredDate: null,
       items: [...this.cartItems],
       total: this.getCartTotal(),
+      weight: totalWeight,
+      status: 'Order Received',
       ...orderDetails
     };
 

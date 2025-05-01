@@ -10,31 +10,53 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="ion-padding">
-    <ion-list lines="full" *ngIf="orders.length > 0">
-      <ion-list-header>
-        <ion-label>Order History</ion-label>
-      </ion-list-header>
-      
-      <ion-item *ngFor="let order of orders" button detail (click)="showOrderDetails(order)">
-        <ion-label>
-          <h2>Order #{{ order.id.substring(order.id.length - 6) }}</h2>
-          <p>Date: {{ order.orderDate | date:'medium' }}</p>
-          <p>Items: {{ order.items.length }} | Status: <ion-text color="success">{{ order.status }}</ion-text></p>
-        </ion-label>
-        <ion-note slot="end" color="primary">₱{{ order.total.toFixed(2) }}</ion-note>
-      </ion-item>
-    </ion-list>
-
-    <div class="empty-state" *ngIf="orders.length === 0">
-      <ion-icon name="receipt-outline" size="large"></ion-icon>
-      <h2>No Orders Yet</h2>
-      <p>Your order history will appear here</p>
-      <ion-button expand="block" routerLink="/tabs/tab6">
-        Shop Now
-        <ion-icon name="cart" slot="end"></ion-icon>
-      </ion-button>
-    </div>
-  </div>
+  <ion-searchbar placeholder="Search"></ion-searchbar>
+  <ion-card *ngFor="let order of orders">
+    <ion-card-content>
+      <ion-grid>
+        <!-- Status Icons Row -->
+        <ion-row class="ion-justify-content-between">
+          <ion-col size="4" class="ion-text-center">
+            <ion-icon name="receipt-outline"></ion-icon>
+            <p>Order Received</p>
+            <p>{{ order.receivedDate | date:'mediumDate' }}</p>
+          </ion-col>
+          <ion-col size="4" class="ion-text-center">
+            <ion-icon name="car-outline"></ion-icon>
+            <p>Order Dispatched</p>
+            <p>{{ order.dispatchedDate | date:'mediumDate' }}</p>
+          </ion-col>
+          <ion-col size="4" class="ion-text-center">
+            <ion-icon name="home-outline"></ion-icon>
+            <p>Order Delivered</p>
+            <p>{{ order.deliveredDate | date:'mediumDate' }}</p>
+          </ion-col>
+        </ion-row>
+  
+        <!-- Order Info Row -->
+        <ion-row>
+          <ion-col>
+            <h3>Order #{{ order.id }}</h3>
+            <p>{{ order.deliveryAddress || order.address }}</p>
+            <p><strong>{{ order.weight || 0 }}kg</strong> | 
+              <span [ngClass]="{
+                'status-received': order.status === 'Order Received',
+                'status-dispatched': order.status === 'Order Dispatched',
+                'status-delivered': order.status === 'Order Delivered',
+                'status-cancelled': order.status === 'Cancelled'
+              }">{{ order.status }}</span>
+            </p>
+          </ion-col>
+          <ion-col size="4" class="ion-text-right">
+            <p>Subtotal:</p>
+            <h2>₱{{ order.total.toFixed(2) }}</h2>
+            <ion-button size="small" fill="outline" color="success">
+              Details
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  
 </ion-content>
-

@@ -11,6 +11,139 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
 
+<ion-content class="ion-padding">
+  <!-- Stats Cards -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>16</ion-card-title>
+            <ion-card-subtitle>Total Members</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-progress-bar value="0.4" color="success"></ion-progress-bar>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>21</ion-card-title>
+            <ion-card-subtitle>Total Products</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-progress-bar value="0.6" color="success"></ion-progress-bar>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>37</ion-card-title>
+            <ion-card-subtitle>Total Customers</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-progress-bar value="0.8" color="success"></ion-progress-bar>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Revenue Chart Placeholder -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Revenue</ion-card-title>
+      <ion-segment value="monthly">
+        <ion-segment-button value="monthly">Monthly</ion-segment-button>
+        <ion-segment-button value="weekly">Weekly</ion-segment-button>
+        <ion-segment-button value="today">Today</ion-segment-button>
+      </ion-segment>
+    </ion-card-header>
+    <ion-card-content>
+      <img src="" alt="Chart Placeholder" style="width: 100%; height: auto;">
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Pending Deliveries -->
+  <ion-item lines="none">
+    <ion-label><h2>Pending Deliveries</h2></ion-label>
+    <ion-button fill="clear" slot="end">See All</ion-button>
+  </ion-item>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card>
+          <img src="assets/jasmine-rice.jpg" />
+          <ion-card-header>
+            <ion-card-title>Jose Manalo</ion-card-title>
+            <ion-card-subtitle>Jasmine Rice 10 kg</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            ₱735.10
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card>
+          <img src="assets/white-corn.jpg" />
+          <ion-card-header>
+            <ion-card-title>Kim Chu</ion-card-title>
+            <ion-card-subtitle>Visayan White Corn 20 kg</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            ₱1,250.10
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Stocks Section -->
+  <ion-item lines="none">
+    <ion-label><h2>Stocks</h2></ion-label>
+    <ion-button fill="clear" slot="end">See All</ion-button>
+  </ion-item>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4">
+        <ion-card>
+          <img src="assets/sweet-potato-1.jpg" />
+          <ion-card-header>
+            <ion-card-title>Sweet Potato</ion-card-title>
+            <ion-card-subtitle>
+                30 kg <ion-badge color="primary" style="float: right;">60/100</ion-badge>
+            </ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card>
+          <img src="assets/sweet-potato-2.jpg" />
+          <ion-card-header>
+            <ion-card-title>Sweet Potato</ion-card-title>
+            <ion-card-subtitle>20 kg</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card>
+          <img src="assets/green-banana.jpg" />
+          <ion-card-header>
+            <ion-card-title>Green Banana</ion-card-title>
+            <ion-card-subtitle>56 kg</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -11,6 +11,7 @@ import { OrderReviewComponent } from '../modals/order-review/order-review.compon
 })
 export class Tab6Page {
   products: any[] = [];
+  filteredProducts: any[] = [];
   cartItems: any[] = [];
 
   constructor(
@@ -27,7 +28,23 @@ export class Tab6Page {
 
   loadProducts() {
     this.products = this.productsService.loadProducts();
+    this.filteredProducts = [...this.products];
     this.cartItems = this.productsService.getCartItems();
+  }
+
+  onSearch(event: any) {
+    const searchTerm = event.detail.value.toLowerCase();
+    
+    if (searchTerm === '') {
+      // If search is cleared, show all products
+      this.filteredProducts = [...this.products];
+    } else {
+      // Filter products based on search term
+      this.filteredProducts = this.products.filter(product => 
+        product.name.toLowerCase().includes(searchTerm) || 
+        (product.description && product.description.toLowerCase().includes(searchTerm))
+      );
+    }
   }
 
   // Add this method to handle template calls
@@ -41,6 +58,26 @@ export class Tab6Page {
       this.presentToast(`${updatedProduct.name} removed from cart`);
     }
     return updatedProduct;
+  }
+
+  updateQuantity(product: any, event: any) {
+    const newQuantity = parseInt(event.detail.value, 10);
+    
+    // Ensure it's a valid number
+    if (!isNaN(newQuantity) && newQuantity >= 0) {
+      // Get current quantity to determine if we're adding or removing
+      const currentQuantity = product.quantity || 0;
+      const updatedProduct = this.productsService.updateQuantity(product, newQuantity);
+      
+      // Show appropriate toast message based on the change
+      if (newQuantity > currentQuantity) {
+        this.presentToast(`${updatedProduct.name} quantity updated to ${newQuantity}`);
+      } else if (newQuantity < currentQuantity && newQuantity > 0) {
+        this.presentToast(`${updatedProduct.name} quantity reduced to ${newQuantity}`);
+      } else if (newQuantity === 0) {
+        this.presentToast(`${updatedProduct.name} removed from cart`);
+      }
+    }
   }
 
   async showCustomerActionSheet(product: any) {
