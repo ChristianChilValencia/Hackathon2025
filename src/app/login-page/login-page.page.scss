@@ -1,0 +1,266 @@
+ion-content {
+  --background: white;
+  font-family: 'League Spartan', sans-serif;
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+ion-header {
+  display: none;
+}
+
+/* Header styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #28a745;
+  color: white;
+  padding: 10px 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-icon {
+  font-size: 24px;
+  margin-right: 8px;
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: 500;
+  
+  .agri {
+    font-weight: 700;
+  }
+  
+  .venture {
+    font-weight: 300;
+    font-style: italic;
+  }
+}
+
+.help-icon {
+  font-size: 24px;
+}
+
+/* Hero image */
+.hero-image {
+  width: 100%;
+  height: 40vh;
+  position: relative;
+  overflow: hidden;
+  margin-top: 56px; /* Space for the header */
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* Back button */
+.back-button {
+  position: absolute;
+  top: calc(56px + 40px); /* Header height + some space */
+  left: 15px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  
+  ion-icon {
+    font-size: 20px;
+    color: #333;
+  }
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.tagline {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+  font-family: 'League Spartan', sans-serif;
+}
+
+/* Form styling */
+.form-container {
+  padding: 30px 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  
+  label {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+  }
+}
+
+// Custom rounded inputs
+.custom-input {
+  --background: #e8f5e9;
+  --border-color: transparent;
+  --border-style: solid;
+  --border-width: 1px;
+  --border-radius: 8px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --highlight-color: #28a745;
+  margin-bottom: 16px;
+  border-radius: 25px;
+  
+  ion-input {
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  ion-icon {
+    color: #666;
+    font-size: 20px;
+    margin-right: 8px;
+  }
+}
+
+// Remember me & forgot password row
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 24px 0;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  
+  ion-checkbox {
+    --size: 18px;
+    --border-color: #28a745;
+    --border-radius: 4px;
+    --background-checked: #28a745;
+    --checkmark-color: white;
+    margin-right: 8px;
+  }
+  
+  span {
+    font-size: 14px;
+    color: #555;
+  }
+}
+
+.forgot {
+  font-size: 14px;
+  color: #28a745;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+// Main sign in button
+.sign-in-button {
+  --background: #28a745;
+  --color: white;
+  height: 48px;
+  --border-radius: 8px;
+  --box-shadow: none;
+  font-weight: 500;
+  font-size: 16px;
+  text-transform: none;
+  margin: 20px 0;
+}
+
+// Divider with text
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 24px 0;
+  color: #999;
+  font-size: 14px;
+
+  &:before,
+  &:after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+  }
+
+  span {
+    padding: 0 16px;
+  }
+}
+
+// Social buttons row
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+// Circular social buttons
+.social-circle-button {
+  --border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  --padding-start: 0;
+  --padding-end: 0;
+  --box-shadow: none;
+  
+  ion-icon {
+    font-size: 22px;
+  }
+}
+
+.facebook-button {
+  --background: #1877F2;
+  --color: #ffffff;
+}
+
+.google-button {
+  --background: white;
+  --color: black;
+  border: 1px solid #ddd;
+}
+
+.apple-button {
+  --background: #000000;
+  --color: #ffffff;
+}
+
+// Sign up text
+.signup-text {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 14px;
+  color: #555;
+  
+  a {
+    color: #28a745;
+    text-decoration: none;
+    font-weight: 600;
+  }
+}

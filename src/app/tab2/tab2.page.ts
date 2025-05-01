@@ -100,8 +100,12 @@ export class Tab2Page {
       componentProps: {
         product: productToEdit ? {...productToEdit} : undefined
       },
-      breakpoints: [0, 0.5, 0.8],
-      initialBreakpoint: 0.5
+      presentingElement: await this.modalCtrl.getTop() || undefined,
+      cssClass: 'fullscreen-modal',
+      breakpoints: [0, 0.25, 0.5, 0.75, 1],
+      initialBreakpoint: 1,
+      backdropDismiss: false,
+      backdropBreakpoint: 0.5
     });
 
     await modal.present();

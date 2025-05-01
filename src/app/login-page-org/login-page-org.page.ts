@@ -14,6 +14,11 @@ export class LoginPageOrgPage implements OnInit {
   ngOnInit() {
   }
 
+  signIn() {
+    // Handle sign-in logic here
+    this.navigateToProfileConsumer();
+  }
+
   navigateToProfileConsumer() {
     this.router.navigate(['profile-consumer']);
   }
