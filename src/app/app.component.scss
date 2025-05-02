@@ -1,0 +1,78 @@
+/* Main container styles */
+.app-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Ensure ion-app takes full height and width */
+ion-app {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.15s ease-out, width 0.15s ease-out, height 0.15s ease-out;
+  transform-origin: center center;
+  overflow: hidden;
+  position: relative;
+  flex-direction: column;
+  max-width: 100vw;
+  max-height: 100vh;
+  margin: 0 auto;
+  
+  /* Add a will-change property to optimize rendering performance */
+  will-change: transform, width, height;
+  
+  /* Fixes for ensuring content stays within bounds when scaling */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+/* Fix for potential blank screen issues */
+ion-router-outlet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+ion-content {
+  --background: transparent;
+}
+
+/* Force display of all pages */
+.ion-page {
+  display: block !important;
+  visibility: visible !important;
+}
+
+// Make sure any fixed position elements scale properly
+:host ::ng-deep {
+  .fixed-content, 
+  ion-header, 
+  ion-footer {
+    transition: inherit;
+  }
+}
+
+// Global body/html adjustments
+:host {
+  ::ng-deep {
+    html, body {
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
