@@ -21,41 +21,71 @@
 </div>
   <div class="ion-padding">
     <ion-row>
-      <ion-col size="6" *ngFor="let product of filteredProducts">
-        <ion-card  style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+      <ion-col size="6" size-sm="6" size-md="4" size-lg="3" *ngFor="let product of filteredProducts">
+        <ion-card (click)="showCustomerActionSheet(product)" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+          <!-- Product Image Section -->
+          <div class="product-image-container" *ngIf="product.imageType">
+            <img [src]="'assets/' + product.imageType + '.png'" alt="Product Image" class="product-image">
+          </div>
+          <ion-card-header>
+            <ion-card-title>{{ product.name }}</ion-card-title>
+          </ion-card-header>
           <ion-card-content>
-            <ion-button expand="block" size="small" (click)="showCustomerActionSheet(product)" color="medium">
-              More Options
-            </ion-button>
-            <ion-card-header>{{ product.name }}
-              <span>₱{{ product.price }}/KG</span>
-            </ion-card-header>
-
-
-          <!-- Quantity controls -->
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-
-
-            <!-- Action buttons -->
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <p><strong>Price:</strong> ₱{{ product.price }}</p>
+            
+            <!-- Quantity Information Section -->
+            <div class="quantity-info">
+              <p *ngIf="product.kilos">
+                <ion-icon name="scale-outline" color="primary"></ion-icon>
+                <strong> Weight:</strong> {{ product.kilos }} kg
+              </p>
+              
+              <p *ngIf="product.quantityAmount">
+                <ion-icon name="calculator-outline" color="tertiary"></ion-icon>
+                <strong> Quantity:</strong> {{ product.quantityAmount }} {{ getUnitDisplay(product.quantityUnit) }}
+              </p>
+            </div>
+            
+            <div class="date-info" *ngIf="product.harvestDate">
+              <p>
+                <ion-icon name="calendar-outline" color="success"></ion-icon>
+                <strong>Harvested:</strong> {{ formatDate(product.harvestDate) }}
+              </p>
+            </div>
+            
+            <div class="date-info" *ngIf="product.wasteDate">
+              <p [ngClass]="{'warning-date': isNearWasteDate(product.wasteDate)}">
+                <ion-icon name="alert-circle-outline" [color]="isNearWasteDate(product.wasteDate) ? 'danger' : 'warning'"></ion-icon>
+                <strong>Expire:</strong> {{ formatDate(product.wasteDate) }}
+                <span *ngIf="isNearWasteDate(product.wasteDate)" class="expiry-warning">
+                  ({{ getDaysUntilWaste(product.wasteDate) }} days left)
+                </span>
+              </p>
+            </div>
+            
+            <p><strong>Description: </strong>{{ product.description }}</p>
+            
+            <!-- Quantity controls -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+              <div style="display: flex; align-items: center;">
                 <div class="quantity-input-container">
-                <ion-input type="number" 
-                     min="0" 
-                     max="9999"
-                     [value]="product.quantity || 0"
-                     (ionChange)="updateQuantity(product, $event)"
-                     style="--padding-start: 8px; --padding-end: 8px; border: 1px solid var(--ion-color-medium); border-radius: 4px; max-width: 60px; text-align: center; background: transparent;">
-                </ion-input>
+                  <ion-input type="number" 
+                       min="0" 
+                       max="9999"
+                       [value]="product.quantity || 0"
+                       (ionChange)="updateQuantity(product, $event)"
+                       style="--padding-start: 8px; --padding-end: 8px; border: 1px solid var(--ion-color-medium); border-radius: 4px; max-width: 60px; text-align: center; background: transparent;">
+                  </ion-input>
                 </div>
               </div>
               
               <div style="display: flex; align-items: center;">
-                <ion-button fill="clear" size="small" (click)="adjustQuantity(product, -1)" [disabled]="!product.quantity">
-                <ion-icon name="remove-circle" slot="icon-only"></ion-icon>
+                <ion-button fill="clear" size="small" (click)="adjustQuantity(product, -1); $event.stopPropagation();" [disabled]="!product.quantity">
+                  <ion-icon name="remove-circle" slot="icon-only"></ion-icon>
                 </ion-button>
                                 
-                <ion-button fill="clear" size="small" (click)="adjustQuantity(product, 1)">
-                <ion-icon name="add-circle" slot="icon-only" color="success"></ion-icon>
+                <ion-button fill="clear" size="small" (click)="adjustQuantity(product, 1); $event.stopPropagation();">
+                  <ion-icon name="add-circle" slot="icon-only" color="success"></ion-icon>
                 </ion-button>
               </div>
             </div>
@@ -64,8 +94,6 @@
       </ion-col>
     </ion-row>
   </div>
-
-
 </ion-content>
 
 <ion-footer *ngIf="cartItems.length > 0">

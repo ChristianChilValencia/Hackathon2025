@@ -11,6 +11,7 @@
     ion-icon {
       font-size: 18px;
       margin-right: 4px;
+      flex-shrink: 0; /* Prevent icon from shrinking */
     }
   }
 }
@@ -33,16 +34,19 @@ ion-card {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
+  margin: 8px 4px; /* Reduced margins for more space */
+  width: calc(100% - 8px); /* Ensure consistent width accounting for margins */
+  height: auto; /* Let height be determined by content */
   
   &:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px); /* Reduced lift effect */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
 }
 
 .product-image-container {
   width: 100%;
-  height: 120px;
+  height: 120px; /* Smaller height for better proportions on mobile */
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -55,5 +59,87 @@ ion-card {
 .product-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Cover ensures the image fills the container */
+  padding: 0; /* Remove padding to maximize image space */
+}
+
+/* Improve card content spacing */
+ion-card-content {
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+ion-card-header {
+  padding: 12px 12px 4px 12px; /* More padding top/bottom, less at bottom */
+  
+  ion-card-title {
+    font-size: 16px; /* Slightly smaller title, more readable */
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  ion-card-subtitle {
+    font-size: 13px;
+    margin: 4px 0 0 0;
+  }
+}
+
+/* Better grid layout for mobile */
+ion-row {
+  margin: 0 -4px; /* Align with card margins */
+}
+
+ion-col {
+  padding: 4px; /* Reduce column padding */
+}
+
+/* Make font sizes more consistent */
+p {
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 6px 0;
+}
+
+/* Responsive adjustments for different screen sizes */
+@media (max-width: 320px) {
+  /* Extra small phones */
+  ion-card-header {
+    padding: 10px 10px 2px 10px;
+  }
+  
+  ion-card-content {
+    padding: 6px 10px 10px;
+  }
+  
+  .product-image-container {
+    height: 100px;
+  }
+}
+
+@media (min-width: 480px) {
+  /* Larger phones and tablets */
+  .product-image-container {
+    height: 140px;
+  }
+  
+  ion-card-title {
+    font-size: 18px;
+  }
+}
+
+/* Ensure quantity info is clearly displayed */
+.quantity-info {
+  margin-top: 6px;
+  
+  p {
+    margin: 4px 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  ion-icon {
+    margin-right: 4px;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
 }

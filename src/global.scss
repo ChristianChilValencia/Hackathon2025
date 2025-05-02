@@ -39,6 +39,81 @@
 /* Force light mode */
 :root {
   --ion-color-scheme: light;
+  
+  /* Improve overall app padding and spacing */
+  --ion-padding: 16px;
+  --ion-margin: 16px;
+  --ion-grid-padding: 16px;
+  --ion-grid-column-padding: 12px;
+  
+  /* Better card dimensions */
+  --ion-card-margin: 12px;
+  --ion-card-padding: 16px;
+  
+  /* Font size adjustments for better readability on small screens */
+  --ion-font-size-base: 16px;
+  --ion-font-size-small: 14px;
+}
+
+ion-card {
+  width: 90vw;
+  height: 40vh;
+}
+
+/* Adjust content width for better aspect ratio */
+ion-content {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  
+  /* Ensure text is readable on mobile */
+  font-size: var(--ion-font-size-base);
+  
+  @media (min-width: 768px) {
+    --padding-start: 24px;
+    --padding-end: 24px;
+    --padding-top: 20px;
+    --padding-bottom: 20px;
+  }
+}
+
+/* Improve mobile display with better touch targets */
+ion-button {
+  height: 44px;
+  font-size: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+}
+
+/* Adjust card styling globally */
+ion-card {
+  margin: var(--ion-card-margin);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+  
+  ion-card-title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  ion-card-subtitle {
+    font-size: 14px;
+  }
+}
+
+/* Give more space to inputs and form elements */
+ion-item {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --inner-padding-end: 12px;
+  min-height: 48px; /* Improve touch target size */
+}
+
+ion-item-divider {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 12px;
+  --padding-bottom: 8px;
 }
 
 /**
@@ -237,6 +312,50 @@ ion-content.custom-content {
     color: #4CAF50;
     text-decoration: none;
     font-weight: 600;
+  }
+}
+
+/* Mobile optimization for common components */
+@media (max-width: 480px) {
+  ion-grid {
+    --ion-grid-padding: 8px;
+  }
+  
+  /* Make cards more visible on small screens */
+  ion-card {
+    margin: 8px 6px;
+  }
+  
+  /* Increase visibility of text */
+  p, h3, h4 {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  /* Improve product display */
+  .product-image-container {
+    height: 130px;
+  }
+}
+
+/* Fix scrolling on mobile for horizontal elements */
+.horizontal-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  
+  ion-col {
+    scroll-snap-align: start;
+  }
+}
+
+/* Adjust button spacing in tight layouts */
+ion-buttons.tight-layout {
+  gap: 4px;
+  
+  ion-button {
+    --padding-start: 8px;
+    --padding-end: 8px;
   }
 }
 

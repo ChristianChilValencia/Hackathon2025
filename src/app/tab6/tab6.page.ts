@@ -47,7 +47,53 @@ export class Tab6Page {
     }
   }
 
-  // Add this method to handle template calls
+  // Get formatted display for quantity units (from Tab2)
+  getUnitDisplay(unit: string): string {
+    if (!unit) return 'pieces';
+    
+    // Singular to plural mapping if needed
+    switch (unit) {
+      case 'piece': return 'pieces';
+      case 'bundle': return 'bundles';
+      case 'sack': return 'sacks';
+      case 'box': return 'boxes';
+      case 'crate': return 'crates';
+      default: return unit;
+    }
+  }
+
+  // Format date from ISO string to readable format (from Tab2)
+  formatDate(dateString: string): string {
+    if (!dateString) return 'N/A';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+      month: 'short', 
+      day: 'numeric', 
+      year: 'numeric' 
+    });
+  }
+
+  // Check if a product is near its waste date (within 3 days) (from Tab2)
+  isNearWasteDate(dateString: string): boolean {
+    if (!dateString) return false;
+    
+    const wasteDate = new Date(dateString);
+    const today = new Date();
+    const daysLeft = Math.floor((wasteDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+    
+    return daysLeft <= 3 && daysLeft >= 0;
+  }
+
+  // Get days until waste date (from Tab2)
+  getDaysUntilWaste(dateString: string): number {
+    if (!dateString) return 0;
+    
+    const wasteDate = new Date(dateString);
+    const today = new Date();
+    return Math.max(0, Math.floor((wasteDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)));
+  }
+
+  // Adjust quantity in cart
   adjustQuantity(product: any, change: number) {
     const updatedProduct = this.productsService.adjustQuantity(product, change);
     if (change > 0) {
@@ -133,7 +179,7 @@ export class Tab6Page {
           type: 'number',
           min: 0,
           max: 99,
-          value: product.quantity.toString()
+          value: product.quantity?.toString() || '0'
         }
       ],
       buttons: [
